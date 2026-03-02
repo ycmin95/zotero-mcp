@@ -607,6 +607,12 @@ def main():
         transport = getattr(args, "transport", "stdio")
         # Ensure environment is initialized (Claude config or standalone config)
         setup_zotero_environment()
+        # Clear proxy environment variables that cause httpx errors
+        os.environ.pop("ALL_PROXY", None)
+        os.environ.pop("all_proxy", None)
+        os.environ["no_proxy"] = "*"
+        os.environ["http_proxy"] = ""
+        os.environ["https_proxy"] = ""
         if transport == "stdio":
             mcp.run(transport="stdio")
         elif transport == "streamable-http":

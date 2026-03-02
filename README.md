@@ -198,6 +198,9 @@ Example prompts:
 - "Show me papers tagged '#Arm' excluding those with '#Crypt' in my library"
 - "Search for papers on operating system with tag '#Arm'"
 - "Export the BibTeX citation for papers on machine learning"
+- "Create a collection called 'PhD Research' and add items to it"
+- "Create a new journal article entry with tags and add it to my Reading List"
+- "Import these papers by DOI: 10.1145/3448016.3452848, 10.1038/s41586-023-06787-8"
 - **"Find papers conceptually similar to deep learning in computer vision"** *(semantic search)*
 - **"Research that relates to the intersection of AI and healthcare"** *(semantic search)*
 - **"Papers that discuss topics similar to this abstract: [paste text]"** *(semantic search)*
@@ -311,6 +314,7 @@ The first time you use PDF annotation features, the necessary tools will be auto
 - `zotero_search_items`: Search your library by keywords
 - `zotero_advanced_search`: Perform complex searches with multiple criteria
 - `zotero_get_collections`: List collections
+- `zotero_search_collections`: Search collections by name and return keys
 - `zotero_get_collection_items`: Get items in a collection
 - `zotero_get_tags`: List all tags
 - `zotero_get_recent`: Get recently added items
@@ -327,6 +331,13 @@ The first time you use PDF annotation features, the necessary tools will be auto
 - `zotero_search_notes`: Search in notes and annotations (including PDF-extracted)
 - `zotero_create_note`: Create a new note for an item (beta feature)
 
+### ✍️ Library Write Tools
+- `zotero_create_collection`: Create a collection (supports subcollections via parent key)
+- `zotero_add_items_to_collection`: Add existing items to a collection
+- `zotero_create_item`: Create new Zotero items (article/book/webpage/etc.)
+- `zotero_update_item`: Update metadata, tags, and collections on existing items
+- `zotero_add_by_identifier`: Import items by DOI/ISBN/arXiv/PMID (optional PDF URL attachment)
+
 ## 🔍 Troubleshooting
 
 ### General Issues
@@ -334,6 +345,7 @@ The first time you use PDF annotation features, the necessary tools will be auto
 - **Can't connect to library**: Check your API key and library ID if using web API
 - **Full text not available**: Make sure you're using Zotero 7+ for local full-text access
 - **Local library limitations**: Some functionality (tagging, library modifications) may not work with local JS API. Consider using web library setup for full functionality. (See the [docs](docs/getting-started.md#local-library-limitations) for more info.)
+- **Write tool fails in local mode**: Item/collection creation and updates require Web API credentials (`ZOTERO_API_KEY`, `ZOTERO_LIBRARY_ID`, `ZOTERO_LIBRARY_TYPE`) because the local API is read-only.
 - **Installation/search option switching issues**: Database problems from changing install methods or search options can often be resolved with `zotero-mcp update-db --force-rebuild`
 
 ### Semantic Search Issues

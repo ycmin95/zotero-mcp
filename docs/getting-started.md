@@ -188,10 +188,16 @@ When connected to Claude Desktop or another MCP client, you'll have access to th
 - **zotero_get_item_metadata**: Get detailed information about a specific item
 - **zotero_get_item_fulltext**: Get the full text content of an item
 - **zotero_get_collections**: List all collections in your library
+- **zotero_search_collections**: Search collections by name and return collection keys
 - **zotero_get_collection_items**: Get all items in a specific collection
 - **zotero_get_item_children**: Get child items (attachments, notes) for a specific item
 - **zotero_get_tags**: Get all tags used in your library
 - **zotero_get_recent**: Get recently added items to your library
+- **zotero_create_collection**: Create new collections/folders
+- **zotero_add_items_to_collection**: Add existing items to a collection
+- **zotero_create_item**: Create new Zotero items with metadata
+- **zotero_update_item**: Update existing items, including tags and collections
+- **zotero_add_by_identifier**: Import items from DOI/ISBN/arXiv/PMID
 
 ## Example Queries
 
@@ -214,9 +220,17 @@ If you encounter issues:
 
 ### Local Library Limitations
 
-Some functionality will not work for local libraries due to the distinct differences with [Zotero's local JS API](https://www.zotero.org/support/dev/client_coding/javascript_api). For instance, tagging and other library modifications might not work as expected with the local API connection.
+Some functionality will not work for local libraries due to the distinct differences with [Zotero's local JS API](https://www.zotero.org/support/dev/client_coding/javascript_api). In particular, write operations (creating/updating items and collections) require Web API credentials because the local API is read-only.
 
-**Workaround**: Even without web storage, a workaround for some of these functionalities might be to set up a web library, point the MCP at that, and then things like setting tags should work properly. We're thinking about better ways to work with local instances in future updates.
+**Workaround**: Configure web credentials in your MCP environment:
+
+```bash
+export ZOTERO_API_KEY=your_api_key
+export ZOTERO_LIBRARY_ID=your_library_id
+export ZOTERO_LIBRARY_TYPE=user  # or group
+```
+
+Even without web storage, a practical workaround for these write tools is to point MCP at a web library and keep local mode for read-only access.
 
 ### Database Issues
 
